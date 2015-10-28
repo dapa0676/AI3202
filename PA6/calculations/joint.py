@@ -24,6 +24,7 @@ def jointProbabilityDistribution(engine, jointArray):
   allorderings = list(product([False, True], repeat = n))
 
   permutedList = []
+  
   for i in range(len(newArray)):
     templist = []
     for j in range(n):
@@ -34,9 +35,12 @@ def jointProbabilityDistribution(engine, jointArray):
   for permutation in permutedList:
     permutationString = ""
     probability = jointProbability(engine, permutation)
+    
     for permtuple in permutation:
+		
       if permtuple[0].name == 'pollution':
         permutationString += permtuple[0].name + "=" + ('Low' + ", " if permtuple[1] else 'High' + ", ")
+        
       else:
         permutationString += permtuple[0].name + "=" + str(permtuple[1]) + ", "
     print "The Joint probability of " + permutationString + "is " + str(probability)
@@ -54,6 +58,7 @@ def determineJointTuple(cancerNet, letter, truthyNotDeclared=False):
       xray = node
     if node.id == 4:
       dyspnoea = node
+      
   if truthyNotDeclared:
     if letter == 'P':
       input = pollution
@@ -68,6 +73,7 @@ def determineJointTuple(cancerNet, letter, truthyNotDeclared=False):
     else:
       print "invalid input"
       exit()
+      
   else:
     if letter == 'p':
       input = (pollution, True)

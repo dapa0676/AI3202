@@ -23,6 +23,7 @@ def conditionalProbability(engine, input, conditionals, printable = True):
 
   Q = engine.marginal(queryNode)[0]
   index = Q.generate_index([truthy],range(Q.nDims))
+  
   if printable:
     print "The conditional probability of", queryNode.name + "=" + truthyName + " |", conditionalString + "is", Q[index]
 

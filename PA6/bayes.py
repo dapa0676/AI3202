@@ -16,8 +16,10 @@ from calculations.joint import *
 def main():
   try:
     optlist, remainder = getopt.getopt(sys.argv[1:], 'j:g:m:p:')
+    
     if len(optlist) == 0:
       print "no arguments provided"
+      
   except getopt.GetoptError as err:
     print str(err)
 
@@ -85,26 +87,32 @@ def main():
       jointEngine = copy.copy(cEngine)
       jointSplit = re.findall('[A-Z]',a)
       jointInput = []
+      
       if len(jointSplit) > 0:
         for letter in jointSplit:
           jointInput.append(determineJointTuple(cMap, letter, True))
         jointProbabilityDistribution(jointEngine,jointInput)
+        
       else:
         jointSplit = re.findall('~?[a-z]',a)
+        
         for letter in jointSplit:
           jointInput.append(determineJointTuple(cMap, letter))
         probability = jointProbability(jointEngine, jointInput)
         jointString = ""
+        
         for joint in jointInput:
+			
           if joint[0].name == 'pollution':
             jointString += joint[0].name + "=" + ('Low' + ", " if joint[1] else 'High' + ", ")
+            
           else:
             jointString += joint[0].name + "=" + str(joint[1]) + ", "
 
         print "The joint probability of " + jointString + "is", probability
      
      
-# set priors
+# set priors (non-functional)
     elif o == "-p":
 		if a[0] == 'P':
 			pollutionLow = float(a[1:])
@@ -115,5 +123,6 @@ def main():
 		elif a[0] == 's':
 			smokerTrue = float(a[1:0])
 		cMap = BayesModel()
+		
 if __name__ == "__main__":
     main()
