@@ -13,12 +13,6 @@ from calculations.marginal import *
 from calculations.conditional import *
 from calculations.joint import *
 
-
-try:
-    from IPython import embed
-except:
-    pass
-
 def main():
   try:
     optlist, remainder = getopt.getopt(sys.argv[1:], 'j:g:m:p:')
@@ -120,6 +114,6 @@ def main():
 			smokerFalse = float(a[1:0])
 		elif a[0] == 's':
 			smokerTrue = float(a[1:0])
-		cEngine = JunctionTreeEngine(cMap)
+		cMap = BayesModel()
 if __name__ == "__main__":
     main()

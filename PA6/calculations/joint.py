@@ -3,36 +3,19 @@ from conditional import *
 from itertools import *
 import copy
 
-try:
-    from IPython import embed
-except:
-    pass
-
-
-# Returns the joint probability for the given variables
-
 def jointProbability(engine, jointArray):
 
-  #Base case: if joint probability is only 2 vars, use
-  # P(X=x and Y=y) = P(Y=y | X=x) * P(X=x)
   jointArrayCopy = copy.copy(jointArray)
+  
   if len(jointArrayCopy) == 2:
     tupleA, tupleB = jointArrayCopy
     engine = copy.copy(engine)
     return  conditionalProbability(engine, tupleB, [tupleA], False) * margninalProbability(engine, tupleA[0], False, tupleA[1])
 
-  #Call joint function recursively to break down the probaility
-  # P(Z=z, X=x, Y=y) = joinProb(Z=z, JointProb(X=x,Y=y)))
+  #recursive calls
   firstElement = jointArrayCopy.pop(0)
   return conditionalProbability(engine, firstElement, jointArrayCopy, False) * jointProbability(engine,jointArrayCopy)
 
-
-
-
-
-#GET JOINT PROBABILITY DISTRIBUTIONS (FOR CAPITAL LETTERS)
-
-# For each combination of true, false for each variable, get the joint probability
 
 def jointProbabilityDistribution(engine, jointArray):
 
@@ -83,7 +66,7 @@ def determineJointTuple(cancerNet, letter, truthyNotDeclared=False):
     elif letter == 'D':
       input = dyspnoea
     else:
-      print "Joint Probability variables must all be in the set P, S, C, X, D"
+      print "invalid input"
       exit()
   else:
     if letter == 'p':
@@ -107,7 +90,7 @@ def determineJointTuple(cancerNet, letter, truthyNotDeclared=False):
     elif letter == '~d':
       input = (dyspnoea, False)
     else:
-      print "Joint Probability variables must be in the set p, s, c, x, d, ~p, ~s, ~c, ~x, ~d"
+      print "invalid input"
       exit()
 
   return input

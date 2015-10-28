@@ -1,13 +1,9 @@
-# Return the marginal probabliity given an input
-
 def margninalProbability(engine, input, printable = True, returnable = True):
-  #Compute the marginal probability of sprinkler given no evidence
   Q = engine.marginal(input)[0]
 
   trueName = 'true'
   falseName = 'false'
 
-  # change true/false to low/high for polution
   if input.name == 'pollution':
     trueName = 'low'
     falseName = 'high'
@@ -20,7 +16,6 @@ def margninalProbability(engine, input, printable = True, returnable = True):
   if printable:
     print "The marginal probability of", input.name + "=" + falseName + ":", Q[false]
 
-  #always return true
   if returnable:
     return Q[true]
   else:

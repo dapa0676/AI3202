@@ -1,8 +1,3 @@
-try:
-    from IPython import embed
-except:
-    pass
-
 import sys
 from numpy import *
 from pbnt.Graph import *
@@ -21,7 +16,6 @@ def BayesModel():
 
   numberOfNodes = 5
 
-  #name the nodes
   pollution = 0
   smoker = 1
   cancer = 2

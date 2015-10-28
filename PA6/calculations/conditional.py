@@ -1,21 +1,22 @@
-#Return conditional probability given an engine, input tuple and conditional tuple list
 def conditionalProbability(engine, input, conditionals, printable = True):
 
   conditionalString = ""
-  #Assign evidence for conditionals
+  
   for conditional, truthy in conditionals:
     engine.evidence[conditional] = truthy
+    
     if conditional.name == 'pollution':
       conditionalString += conditional.name + "=" + 'Low' + ", " if truthy else 'high' + ", "
+      
     else:
       conditionalString += conditional.name + "=" + str(truthy) + ", "
 
-  #Grab querynode and truthyness from input variable
   queryNode, truthy = input
 
   # change true/false to low/high for polution
   if queryNode.name == 'pollution':
     truthyName = 'low' if truthy else 'high'
+    
   else:
     truthyName = 'true' if truthy else 'false'
 
